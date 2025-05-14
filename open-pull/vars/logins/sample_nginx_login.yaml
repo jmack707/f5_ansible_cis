@@ -1,3 +1,3 @@
-docker_username:            #dockerusername
-docker_password:            #dockerpassword
-registry_url:               #not required to pull Docker Hub
+docker_username: nginx_jwt                  #dockerusername
+docker_password: nginx_jwt                  #dockerpassword
+registry_url: private-registry.nginx.com    #not required to pull Docker Hub

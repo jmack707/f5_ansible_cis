@@ -114,6 +114,7 @@ Each folder contains a `vars/` directory with input YAMLs that define:
 >
 > * Internal domain (e.g., `mgt.test.local`)
 > * BIG-IP hostnames, IPs, and credentials
+> * NGINX JWT
 > * Registry URLs and login credentials
 > * App-specific details (e.g., hostname, TLS requirements)
 
@@ -152,6 +153,7 @@ cd ccn-app
 ansible-navigator run app_deploy.yaml
 ```
 
+📌 More details are avalabile in the indivdual folders.
 ---
 
 ## 📮 Feedback

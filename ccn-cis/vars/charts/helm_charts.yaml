@@ -1,0 +1,16 @@
+helm_charts:
+  - release_name: f5-bigip-ctlr
+    chart_ref: oci://harbor.test.local/library/f5-bigip-ctlr
+    release_namespace: kube-system
+    values_file: vars/values/f5-bigip-ctlr.yaml
+
+  - release_name: cert-manager
+    chart_ref: oci://harbor.test.local/library/cert-manager:v1.17.1
+    release_namespace: cert-manager
+    values_file: vars/values/cert-manager.yaml
+
+  - release_name: nginx-ingress
+    chart_ref: oci://harbor.test.local/library/nginx-ingress
+    release_namespace: nginx-ingress
+    values_file: vars/values/nginx.yaml
+      

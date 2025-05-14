@@ -1,0 +1,25 @@
+- name: Pull Docker images
+  community.docker.docker_image:
+    name: "{{item.name}}"                      # Docker image name
+    tag: "{{ item.docker_tag | default(omit) }}"                       # Docker image tag/version
+    source: pull     
+  loop: "{{ docker_images }}"                          # Loop through the list of images
+  register: pulled_images
+
+
+- name: Display image pull result
+  debug:
+    var: pulled_images
+
+- name: Save Docker images to a tar archive
+  community.docker.docker_image:
+    name: "{{ item.name }}"          # Docker image name
+    tag: "{{ item.docker_tag }}"            # Docker image tag/version
+    source: local                     # Save the image to a tar archive
+    archive_path: "/tmp/{{ item.name | replace('/', '_') }}_{{ item.docker_tag }}.tar"  # Archive path
+  loop: "{{ docker_images }}"        # Loop through the list of images
+  register: archived_images
+
+- name: Debug saved docker images result
+  debug:
+    var: archived_images

@@ -1,0 +1,23 @@
+docker_images:
+  - name: "f5networks/k8s-bigip-ctlr"
+    short_name: "f5networks/k8s-bigip-ctlr"
+    docker_tag: "2.18.1"                     
+  - name: "quay.io/f5_business_development/f5_ee"
+    short_name: f5_business_development/f5_ee
+    docker_tag: "latest"
+  - name: "nginxdemos/nginx-hello"
+    short_name: nginxdemos/nginx-hello
+    docker_tag: "latest"
+  - name: "balabit/syslog-ng"
+    short_name: balabit/syslog-ng
+    docker_tag: "latest"
+  - name: "quay.io/jetstack/cert-manager-controller"
+    short_name: jetstack/cert-manager-controller
+    docker_tag: "v1.17.0"    
+  - name: "quay.io/jetstack/cert-manager-cainjector"
+    short_name: jetstack/cert-manager-cainjector
+    docker_tag: "v1.17.0"
+  - name: "quay.io/jetstack/cert-manager-webhook"
+    short_name: jetstack/cert-manager-webhook
+    docker_tag: "v1.17.0"
+archive_dir: "/tmp"

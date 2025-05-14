@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  gather_facts: false
+  become: true
+  
+  vars_files:
+    - vars/logins/nginx_login.yaml
+    - vars/images/nginx_images.yaml
+  vars: 
+    registry_url: "private-registry.nginx.com"
+
+  tasks:
+    - name: Login to Repo
+      import_role:
+        name: docker_login
+
+    - name: Pull Docker Images
+      import_role:
+        name: docker_pull

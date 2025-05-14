@@ -1,0 +1,22 @@
+---
+# Deploy Cert Manager
+- name: Deploy Cert Manager
+  hosts: master
+  gather_facts: false
+
+  vars_files:
+    - vars/certs/mgt.test.local.yaml
+    #- vars/k8s_secret.yaml
+    #- vars/cert_manager.yaml
+
+  vars:
+      package_state: present
+      secret_state: create
+      cluster_issuer: lab.test.local
+      kubeconfig: /home/ubuntu/.kube/config
+
+  tasks:
+
+    - name: Install Cert Manager
+      import_role:
+        name: manage_cert_manager

@@ -1,0 +1,17 @@
+- name: Deploy apps to Kubernetes
+  hosts: master
+  gather_facts: false
+
+  vars_files:
+    - vars/apps/syslog.yaml
+
+  vars:
+    package_state:  absent
+    cluster_issuer: lab.test.local
+    bigip_name: k8s
+    kubeconfig: /home/ubuntu/.kube/config
+
+  tasks:
+    - name: Deploy K8s App
+      import_role:
+        name: manage_k8s_app

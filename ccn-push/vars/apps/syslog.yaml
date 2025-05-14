@@ -1,0 +1,14 @@
+applications:
+  - name: syslog
+    namespace: default
+    image: harbor.test.local/library/balabit/syslog-ng
+    replicas: 1
+    deploy_ingress: false
+    deployment: 
+    - name: syslog
+      port: 514
+    services:
+      - name: syslog
+        port: 514
+        targetPort: 514
+

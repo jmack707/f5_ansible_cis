@@ -1,0 +1,4 @@
+docker_images:
+  - name: "private-registry.nginx.com/nginx-ic-nap/nginx-plus-ingress"
+    short_name: nginx-ic-nap/nginx-plus-ingress
+    docker_tag: "5.0.0"                     

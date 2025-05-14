@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  gather_facts: false
+  become: true
+  
+  vars_files:
+    - vars/charts/helm_charts.yaml
+  
+
+  tasks:
+
+    - name: Manage Helm Charts
+      import_role:
+        name: pull_helm_charts

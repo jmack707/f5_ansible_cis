@@ -1,0 +1,73 @@
+- name: Apply deployment 
+  kubernetes.core.k8s:
+    state: "{{ package_state }}"
+    definition: "{{ lookup('template', 'deployment.yaml.j2') | from_yaml }}"
+  loop: "{{ app.deployment }}"
+  loop_control:
+    loop_var: deploy  
+  vars:
+    app_name: "{{ app.name }}"
+    namespace: "{{ app.namespace }}"
+    image: "{{ app.image }}"
+    replicas: "{{ app.replicas }}"
+  when: app
+
+- name: Apply services '{{app.name}}'
+  kubernetes.core.k8s:
+    state: "{{ package_state }}"
+    definition: "{{ lookup('template', 'service.yaml.j2') | from_yaml }}"
+  loop: "{{ app.services }}"
+  loop_control:
+    loop_var: svc
+  vars:
+    app_name: "{{ app.name }}"
+    namespace: "{{ app.namespace }}"
+
+- name: Manage WAF
+  kubernetes.core.k8s:
+    namespace: default
+    state: "{{ package_state }}"
+    definition: "{{ lookup('file', 'files/{{item}}.yaml') | from_yaml_all }}"  
+  with_items: 
+    - ap-apple-uds
+    - ap-dataguard-alarm-policy
+    - ap-logconf
+    - waf
+  when:  app.deploy_waf is defined    
+
+- name: Apply ingress (optional) 
+  when: app.deploy_ingress | default(false) and app.ingress is defined
+  kubernetes.core.k8s:
+    state: "{{ package_state }}"
+    definition: "{{ lookup('template', 'virtual_server.yaml.j2') | from_yaml }}"
+  vars:
+    app_name: "{{ app.name }}"
+    namespace: "{{ app.namespace }}"
+    ingress: "{{ app.ingress }}"
+    paths: "{{ ingress.paths | default([]) }}"
+
+- name: Apply DNS (optional) 
+  kubernetes.core.k8s:
+    state: "{{ package_state }}"
+    definition: "{{ lookup('template', 'edns.yaml.j2') | from_yaml }}"
+  vars:
+    app_name: "{{ app.name }}"
+    ingress: "{{ app.ingress }}"
+    paths: "{{ app.ingress.paths | default([]) }}"
+  when: app.deploy_dns is defined    
+
+- name: Apply Ingresslink (optional) 
+  kubernetes.core.k8s:
+    state: "{{ package_state }}"
+    definition: "{{ lookup('template', 'ingresslink.yaml.j2') | from_yaml }}"
+  vars:
+    app_name: "{{ app.name }}"
+    namespace: nginx-ingress
+    ingress: "{{ app.ingress }}"
+    paths: "{{ app.ingress.paths | default([]) }}"
+    #paths: "{{ app.ingress.paths }}"
+  when:  app.deploy_ingresslink is defined
+
+
+
+

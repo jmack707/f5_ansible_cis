@@ -1,0 +1,28 @@
+---
+# roles/deploy_k8s_app/templates/ingress.yaml.j2
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ app_name }}-ingress
+  namespace: {{ namespace }}
+  annotations:
+    cert-manager.io/cluster-issuer: "{{ cluster_issuer }}"
+spec:
+  ingressClassName: nginx # use only with k8s version >= 1.18.0
+  tls:
+  - hosts:
+    - {{ ingress.host }}
+    secretName: {{ app_name }}-tls
+  rules:
+    - host: {{ ingress.host }}
+      http:
+        paths:
+{% for path in paths %}
+          - path: /{{ path.path }}
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ path.serviceName }}-svc
+                port:
+                  number: {{ path.servicePort }}
+{% endfor %}

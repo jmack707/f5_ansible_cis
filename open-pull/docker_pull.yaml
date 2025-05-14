@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  gather_facts: false
+  become: true
+  
+  vars_files:
+    - vars/logins/docker_login.yaml
+    - vars/images/docker_images.yaml
+
+  tasks:
+    - name: Login to Repo
+      import_role:
+        name: docker_login
+
+    - name: Pull Docker Images
+      import_role:
+        name: docker_pull

@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  gather_facts: false
+  become: true
+  
+  vars_files:
+    - vars/logins/repo_login.yaml
+    - vars/images/docker_images.yaml
+
+  vars: 
+    registry_url: "harbor.test.local/library"
+
+  tasks:
+    - name: Login to Repo
+      import_role:
+        name: docker_login
+
+    - name: Push Docker Images
+      import_role:
+        name: docker_push
+
+  
+

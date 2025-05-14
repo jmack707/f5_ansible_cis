@@ -1,0 +1,27 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: {{ app_name }}-ingress
+  namespace: {{ namespace }}
+spec:
+  host: {{ ingress.host }}
+  policies:
+  - name: waf-policy  
+  tls:
+    secret: {{ app_name }}-tls 
+    redirect:
+      enable: true
+    cert-manager:
+      cluster-issuer: "{{ cluster_issuer }}"    
+  upstreams:
+{% for path in paths %}
+    - name:  {{ path.path }}
+      service: {{ path.serviceName }}-svc
+      port: {{ path.servicePort }}
+{% endfor %}  
+  routes:
+{% for path in paths %}
+    - path: /{{ path.path }}
+      action:
+        pass: {{ path.path }}
+{% endfor %}        

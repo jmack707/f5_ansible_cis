@@ -1,0 +1,16 @@
+- name: Deploy or remove multiple apps to Kubernetes
+  hosts: master
+  gather_facts: false
+
+  vars_files:
+    - vars/apps/cafe_app.yaml
+
+  vars:
+    package_state: absent
+    cluster_issuer: lab.test.local
+    bigip_name: k8s
+
+  tasks:
+    - name: Deploy K8s App
+      import_role:
+        name: manage_k8s_app

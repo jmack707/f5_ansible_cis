@@ -1,0 +1,20 @@
+    charts:
+      - name: cert-manager
+        repo_url: https://charts.jetstack.io
+        destination: /tmp
+        untar_dir: cert-manager
+        version: "v1.17.1"
+        oci_chart: false
+      - name: oci://ghcr.io/nginx/charts/nginx-ingress
+        destination: /tmp/nginx-ingress-chart
+        untar_dir: nginx-ingress
+        untar_chart: true
+        version: "2.1.0"
+        oci_chart: true
+      - name: f5-bigip-ctlr
+        repo_url: https://f5networks.github.io/charts/stable
+        destination: /tmp
+        untar_dir: f5-bigip-ctlr
+        version: "0.0.35"
+        oci_chart: false
+      

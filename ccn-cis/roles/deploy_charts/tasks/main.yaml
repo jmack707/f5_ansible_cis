@@ -1,0 +1,16 @@
+- name: Install multiple Helm charts
+  kubernetes.core.helm:
+    release_name: "{{ item.release_name }}"             
+    chart_ref: "{{ item.chart_ref }}" 
+    release_namespace: "{{ item.release_namespace }}"             
+    create_namespace: true                    
+    state: "{{ package_state }}"
+    kubeconfig: "{{ kubeconfig }}"
+    validate_certs: false
+    values: "{{ lookup('file', item.values_file) | from_yaml }}"
+  loop: "{{ helm_charts }}"
+  register: helm_results
+
+- name: Debug Helm install results
+  debug:
+    var: helm_results.results

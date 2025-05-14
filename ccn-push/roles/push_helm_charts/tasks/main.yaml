@@ -1,0 +1,4 @@
+    - name: Push Helm charts to Harbor
+      ansible.builtin.shell: |
+        helm push /tmp/{{item.untar_dir}}-{{item.version}}.tgz oci://{{ registry_url }}
+      loop: "{{ charts }}"

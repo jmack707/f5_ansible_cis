@@ -1,0 +1,2 @@
+localhost ansible_connection=local
+master ansible_host=10.1.1.8

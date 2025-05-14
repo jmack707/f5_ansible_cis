@@ -1,0 +1,16 @@
+---
+- hosts: master
+  gather_facts: false
+  become: true
+  
+  vars_files:
+    - vars/charts/helm_charts.yaml
+  
+  vars:
+    package_state: present
+    kubeconfig: /home/ubuntu/.kube/config
+
+  tasks:
+    - name: Deploy Helm Charts
+      import_role:
+        name: deploy_charts

@@ -1,0 +1,29 @@
+  - name: Load images from .tar files with a temporary local name
+    community.docker.docker_image:
+      name: "{{ item.name }}"       # Temporary local name for the image
+      tag: "{{ item.docker_tag }}"         # Original tag from the .tar file
+      load_path: "{{ archive_dir }}/{{ item.name | replace('/', '_') }}_{{ item.docker_tag }}.tar"  # Path to the .tar file
+      source: load
+    loop: "{{ docker_images }}"
+    loop_control:
+      label: "{{ item.name }}"  # Clearly show the current image name being loaded
+
+  - name: Tag the image with the registry URL
+    community.docker.docker_image:
+      name: "{{ item.name }}"  # New source image name (loaded locally)
+      tag: "{{ item.docker_tag }}"    # Original tag
+      repository: "{{ registry_url }}/{{ item.short_name }}"  # New registry target
+      source: local
+    loop: "{{ docker_images }}"
+    loop_control:
+      label: "{{ item.name }}"  # Show the current image name being processed
+
+  - name: Push the tagged image to registry
+    community.docker.docker_image:
+      name: "{{ registry_url }}/{{ item.short_name }}"  # Full registry path (tagged image)
+      tag: "{{ item.docker_tag }}"
+      push: true
+      source: local
+    loop: "{{ docker_images }}"
+    loop_control:
+      label: "{{ item.name }}"  # Show the current image name being processed

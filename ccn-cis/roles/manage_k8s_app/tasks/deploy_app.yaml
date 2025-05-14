@@ -1,0 +1,24 @@
+- name: Apply deployment 
+  kubernetes.core.k8s:
+    state: "{{ package_state }}"
+    definition: "{{ lookup('template', 'deployment.yaml.j2') | from_yaml }}"
+  loop: "{{ app.deployment }}"
+  loop_control:
+    loop_var: deploy  
+  vars:
+    app_name: "{{ app.name }}"
+    namespace: "{{ app.namespace }}"
+    image: "{{ app.image }}"
+    replicas: "{{ app.replicas }}"
+  when: app
+
+- name: Apply services '{{app.name}}'
+  kubernetes.core.k8s:
+    state: "{{ package_state }}"
+    definition: "{{ lookup('template', 'service.yaml.j2') | from_yaml }}"
+  loop: "{{ app.services }}"
+  loop_control:
+    loop_var: svc
+  vars:
+    app_name: "{{ app.name }}"
+    namespace: "{{ app.namespace }}"

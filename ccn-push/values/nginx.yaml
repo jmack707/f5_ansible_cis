@@ -1,0 +1,25 @@
+controller:
+  name: controller
+  nginxplus: true
+  image:
+    repository: harbor.test.local/library/nginx-ic-nap/nginx-plus-ingress
+    tag: "5.0.0"
+  enableOIDC: true
+  enableCertManager: true
+  appprotect:
+    enable: true
+  enableSnippets: true
+  nginxStatus:
+    allowCidrs: "0.0.0.0"
+  config:
+    entries:
+      proxy-protocol: "True"
+      real-ip-header: "proxy_protocol"
+      set-real-ip-from: "0.0.0.0/0"
+  reportIngressStatus:
+    ingressLink: nginx-ingress
+  service:
+    type: ClusterIP
+    externalTrafficPolicy: Cluster
+    extraLabels:
+      app: ingresslink

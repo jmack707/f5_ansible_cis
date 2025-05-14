@@ -1,0 +1,21 @@
+
+#- name: Pull cert-manager chart to /tmp directory
+- name: Pull Helm charts
+  kubernetes.core.helm_pull:
+    chart_ref: "{{ item.name }}"
+    repo_url: "{{ item.repo_url | default(omit) }}"
+    destination: "{{item.destination}}"
+    untar_chart: "{{item.untar_chart | default(omit)}}"
+    chart_version: "{{ item.version | default(omit) }}"
+  no_log: true  
+  loop: "{{ charts }}"
+
+- name: Archive the extracted chart directory
+  community.general.archive:
+    path: "{{item.destination}}/{{item.untar_dir}}"
+    dest: "/tmp/{{item.untar_dir}}-{{item.version}}.tgz"
+    format: gz
+  loop: "{{ charts }}"
+  when: item.oci_chart is true
+
+

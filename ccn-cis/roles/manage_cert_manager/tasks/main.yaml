@@ -1,0 +1,12 @@
+- name:  Manager Cert Manager TLS secret
+  kubernetes.core.k8s:
+    state: "{{ package_state }}"
+    kubeconfig: "{{ kubeconfig }}"
+    definition: "{{ lookup('template', 'templates/tls.secret.j2') | from_yaml_all }}"
+
+- name: Manager Cluster Issuser
+  kubernetes.core.k8s:
+    state: "{{ package_state }}"
+    kubeconfig: "{{ kubeconfig }}"
+    definition: "{{ lookup('template', 'templates/clusterissuer.j2') | from_yaml_all }}"
+  when: package_state == "present" or "absent"

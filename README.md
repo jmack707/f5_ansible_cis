@@ -66,7 +66,7 @@ This ExternalDNS architecture enables modern container applications to leverage 
 
 It creates a unified and elegant **control plane** solution that enhances collaboration between **NetOps** and **DevOps** teams.
 
-📌 **Diagram**: ![Architecture Diagram](diagram.png)
+📌 **Diagram**: ![Architecture Diagram](https://github.com/mdditt2000/k8s-bigip-ctlr/blob/main/user_guides/externaldns-nginx/diagram/2022-01-13_10-37-44.png)
 
 ---
 

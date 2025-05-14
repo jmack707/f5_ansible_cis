@@ -1,3 +1,5 @@
 ccn-cis/vars/logins/credentials.yaml
-ccn-push/vars/logins/*
-open-pull/vars/logins/*
+ccn-push/vars/logins/repo_login.yaml
+open-pull/vars/logins/bigip.yaml
+open-pull/vars/logins/docker_login.yaml
+open-pull/vars/logins/nginx_login.yaml

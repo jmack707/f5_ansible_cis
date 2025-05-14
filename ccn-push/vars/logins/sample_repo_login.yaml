@@ -1,0 +1,3 @@
+docker_username: "admin"              #internal_repo_username
+docker_password:  "passwd"            #internal_repo_password
+registry_url: "repo.test.local"       #URL of internal_repo

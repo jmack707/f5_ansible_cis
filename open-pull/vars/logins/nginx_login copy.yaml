@@ -1,0 +1,3 @@
+docker_username: "nginx_jwt"        #copy the NGINX JWT in variable
+docker_password: "nginx_jwt"        #copy the NGINX JWT in variable
+registry_url: private-registry.nginx.com

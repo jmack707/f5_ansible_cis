@@ -1,0 +1,3 @@
+docker_username:            #dockerusername
+docker_password:            #dockerpassword
+registry_url:               #not required to pull Docker Hub

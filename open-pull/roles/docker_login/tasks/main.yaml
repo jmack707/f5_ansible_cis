@@ -1,5 +1,5 @@
 - name: Log in to Registry
   community.docker.docker_login:
-    username: "{{ docker_username }}"
-    password: "{{ docker_password }}"
+    username: "{{ docker_username | default(omit)}}"
+    password: "{{ docker_password | default(omit)}}"
     registry_url: "{{registry_url | default(omit)}}"

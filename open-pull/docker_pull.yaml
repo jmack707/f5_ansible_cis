@@ -2,15 +2,20 @@
 - hosts: localhost
   gather_facts: false
   become: true
+
+
   
   vars_files:
     - vars/logins/docker_login.yaml
     - vars/images/docker_images.yaml
 
+# Uncomment to login into Docker. Update the docker vars/logins/docker_login.yaml 
+# to set the Docker Username and Password
+
   tasks:
-    - name: Login to Repo
-      import_role:
-        name: docker_login
+   # - name: Login to Repo 
+   #   import_role:
+   #     name: docker_login
 
     - name: Pull Docker Images
       import_role:

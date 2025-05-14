@@ -13,21 +13,7 @@
               "Proxy_Protocol_iRule": {
                   "class": "iRule",
                   "iRule": {
-                      "base64": "#PROXY Protocol Receiver iRule
-# iRule used for F5 IngressLink
-# Layer 4 irule since BIG-IP is passthrough
-when CLIENT_ACCEPTED {
-    set proxyheader "PROXY "
-    if {[IP::version] eq 4} {
-        append proxyheader "TCP4 "
-    } else {
-        append proxyheader "TCP6 "
-    }
-    append proxyheader "[IP::remote_addr] [IP::local_addr] [TCP::remote_port] [TCP::local_port]\r\n"
-}
-when SERVER_CONNECTED {
-    TCP::respond $proxyheader
-}=="
+                      "base64": IiNQUk9YWSBQcm90b2NvbCBSZWNlaXZlciBpUnVsZQojIGlSdWxlIHVzZWQgZm9yIEY1IEluZ3Jlc3NMaW5rCiMgTGF5ZXIgNCBpcnVsZSBzaW5jZSBCSUctSVAgaXMgcGFzc3Rocm91Z2gKd2hlbiBDTElFTlRfQUNDRVBURUQgewogICAgc2V0IHByb3h5aGVhZGVyICJQUk9YWSAiCiAgICBpZiB7W0lQOjp2ZXJzaW9uXSBlcSA0fSB7CiAgICAgICAgYXBwZW5kIHByb3h5aGVhZGVyICJUQ1A0ICIKICAgIH0gZWxzZSB7CiAgICAgICAgYXBwZW5kIHByb3h5aGVhZGVyICJUQ1A2ICIKICAgIH0KICAgIGFwcGVuZCBwcm94eWhlYWRlciAiW0lQOjpyZW1vdGVfYWRkcl0gW0lQOjpsb2NhbF9hZGRyXSBbVENQOjpyZW1vdGVfcG9ydF0gW1RDUDo6bG9jYWxfcG9ydF1cclxuIgp9CndoZW4gU0VSVkVSX0NPTk5FQ1RFRCB7CiAgICBUQ1A6OnJlc3BvbmQgJHByb3h5aGVhZGVyCn09PSI=
                   }
               },
             "dns.listener.53": {

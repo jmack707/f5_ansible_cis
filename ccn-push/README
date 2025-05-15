@@ -1,0 +1,82 @@
+## 📦 ccn-push
+
+The `ccn-push` directory is designed to **push previously downloaded containers and Helm charts** to an internal repository in a closed-network (air-gapped) environment.
+
+---
+
+### 📁 Helm Chart Configuration
+
+Helm charts to be uploaded are defined in:
+
+```
+vars/charts/helm_charts.yaml
+```
+
+Each chart entry includes:
+
+```yaml
+charts:
+  - name: <Chart Name>
+    repo_url: ""                # Not required for internal push
+    destination: <Path to downloaded chart>
+    untar_dir: <Chart filename (no extension)>
+    version: <Chart version>
+    oci_chart: false            # Not required
+```
+
+---
+
+### 🐳 Container Image Configuration
+
+Containers to be pushed are managed in:
+
+```
+vars/images/docker_images.yaml
+```
+
+Sample structure:
+
+```yaml
+docker_images:
+  - name: <Full container image name>
+    short_name: <Simplified name for internal use>
+    docker_tag: <Image tag (version)>
+archive_dir: "/tmp"              # Location where the images are stored
+```
+
+---
+
+### 🔐 Internal Repository Credentials
+
+Credentials for logging into the internal registry are managed in:
+
+```
+vars/logins/repo_login.yaml
+```
+
+> ⚠️ Rename the `sample_repo_login.yaml` file to `repo_login.yaml` and update with your internal repository credentials.
+
+```yaml
+docker_username: "admin"                 # Internal repo username
+docker_password: "passwd"               # Internal repo password
+registry_url: "repo.test.local"         # Internal registry URL
+```
+
+> 🛠️ Be sure to update the `registry_url` in both `docker_push.yaml` and `helm_push.yaml` playbooks to reflect your internal repository endpoint.
+
+---
+
+### ▶️ Running the Playbooks
+
+Execute the following playbooks in order:
+
+```bash
+ansible-playbook docker_push.yaml
+ansible-playbook helm_push.yaml
+```
+
+Once complete, the required images and Helm charts should be uploaded to your internal repository, ready for use in your air-gapped Kubernetes deployment.
+
+---
+
+✅ This approach enables secure, declarative, and repeatable deployment of artifacts into closed or offline environments.

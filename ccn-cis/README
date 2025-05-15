@@ -1,0 +1,129 @@
+# CCN-CIS Directory Documentation
+
+The `ccn-cis` directory contains Ansible playbooks and supporting files for deploying key infrastructure components required for demonstrating Container Ingress Services in a closed network environment. These components include:
+
+* **F5 BIG-IP Kubernetes Controller (CIS)**
+* **NGINX Ingress Controller** (OSS or Plus)
+* **Cert-Manager**
+* **Syslog Server**
+
+This section provides an overview of how to use and configure each component.
+
+---
+
+## Directory Structure
+
+```bash
+ccn-cis/
+├── ansible.cfg
+├── cert-manager_deploy.yaml
+├── cert-manager_remove.yaml
+├── cis_deploy.yaml
+├── cis_remove.yaml
+├── credentials_create.yaml
+├── credentials_remove.yaml
+├── syslog_deploy.yaml
+├── syslog_remove.yaml
+├── inventory
+├── roles/
+├── vars/
+│   ├── apps/
+│   │   └── syslog.yaml
+│   ├── certs/
+│   │   └── mgt.test.local.yaml
+│   ├── charts/
+│   │   └── helm_charts.yaml
+│   ├── logins/
+│   │   ├── credentials.yaml
+│   │   └── sample_credentials.yaml
+│   └── values/
+│       ├── cert-manager.yaml
+│       ├── f5-bigip-ctlr.yaml
+│       └── nginx.yaml
+```
+
+---
+
+## Component Configuration Details
+
+### 🔧 Syslog Server
+
+* Configuration file: `vars/apps/syslog.yaml`
+* This file defines the container image and deployment parameters for the Syslog server.
+* **Important:** Update the `image` field to reference the correct location of your Syslog container image in your internal/private repository.
+
+### 🔐 Cert-Manager
+
+* Cert-Manager is used to mint certificates for applications deployed in Kubernetes.
+* Certificate Authority (CA) certificates are provided in the `vars/certs` directory.
+* **Recommendation:** Replace the provided `mgt.test.local.yaml` with your own sub-CA certificate that is trusted by your organization.
+
+### 📦 Helm Charts
+
+* The `vars/charts/helm_charts.yaml` file lists Helm chart sources and versions for:
+
+  * Cert-Manager
+  * F5 BIG-IP Controller
+  * NGINX Ingress Controller
+* **Note:** These values do not usually require changes unless upgrading or customizing chart locations.
+
+### 🔐 Credentials
+
+* Located in `vars/logins/credentials.yaml`
+* Stores credentials required for accessing BIG-IP and NGINX registry.
+* **Steps:**
+
+  1. Rename `sample_credentials.yaml` to `credentials.yaml`
+  2. Populate the file with:
+
+  ```yaml
+  bigip_username: "admin"
+  bigip_password: "your-bigip-password"
+
+  docker_username: "your-nginx-jwt"
+  docker_password: "your-nginx-jwt"
+  registry_url: "private-registry.nginx.com"
+  ```
+
+### ⚙️ Helm Chart Values
+
+* Located in `vars/values/`
+
+  * `cert-manager.yaml`
+  * `f5-bigip-ctlr.yaml`
+  * `nginx.yaml`
+* These files hold chart-specific configuration and values.
+* Customizations can be made to tailor the deployment to your site-specific requirements (namespace, replica count, labels, etc.).
+
+---
+
+## Deployment Playbooks
+
+Use the following commands to deploy or remove components:
+
+```bash
+# Deploy cert-manager
+ansible-playbook cert-manager_deploy.yaml
+
+# Deploy BIG-IP Controller and NGINX
+ansible-playbook cis_deploy.yaml
+
+# Deploy Syslog Server
+ansible-playbook syslog_deploy.yaml
+```
+
+To remove components:
+
+```bash
+ansible-playbook syslog_remove.yaml
+ansible-playbook cis_remove.yaml
+ansible-playbook cert-manager_remove.yaml
+```
+
+---
+
+## Summary
+
+The `ccn-cis` automation simplifies the installation of networking and security infrastructure in closed Kubernetes environments. By customizing variables and credentials, users can deploy a fully functioning stack that supports modern DevOps workflows across air-gapped or restricted networks.
+
+Let me know if you’d like to see example outputs or add visual diagrams.

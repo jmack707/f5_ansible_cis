@@ -3,7 +3,7 @@ applications:
     namespace: default
     image: harbor.test.local/library/nginxdemos/nginx-hello
     deploy_ingress: true
-    deploy_ingresslink: true
+    deploy_ingresslink: true #Currently configured to use NGINX Virtual
     deploy_waf: true
     deploy_dns: tue
     ip_address: 10.1.10.100

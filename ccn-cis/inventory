@@ -1,2 +1,2 @@
 localhost ansible_connection=local
-master ansible_host=10.1.1.8
+master ansible_host=10.1.1.8 ansible_ssh_private_key_file=/home/ubuntu/.ssh/id_rsa

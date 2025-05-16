@@ -1,0 +1,414 @@
+{
+    "plays": [
+        {
+            "___progress": "100%",
+            "__changed": 0,
+            "__failed": 0,
+            "__ignored": 0,
+            "__in progress": 0,
+            "__ok": 1,
+            "__percent_complete": 100,
+            "__play_name": "Deploy or remove multiple apps to Kubernetes",
+            "__progress": "Complete",
+            "__skipped": 1,
+            "__task_count": 3,
+            "__unreachable": 1,
+            "name": "Deploy or remove multiple apps to Kubernetes",
+            "pattern": "master",
+            "play": "Deploy or remove multiple apps to Kubernetes",
+            "play_pattern": "master",
+            "play_uuid": "0242ac11-0002-7386-509b-000000000003",
+            "playbook": "/home/ubuntu/f5_ansible_cis/ccn-app/app_deploy.yaml",
+            "playbook_uuid": "fcc2c7f3-9460-4f79-90f4-0e5fc6dfd308",
+            "tasks": [
+                {
+                    "__changed": false,
+                    "__duration": "0s",
+                    "__host": "master",
+                    "__number": 0,
+                    "__result": "Skipped",
+                    "__task": "Create namespace (if not exists)",
+                    "__task_action": "kubernetes.core.k8s",
+                    "duration": 0.024425,
+                    "end": "2025-05-15T22:47:19.290266+00:00",
+                    "event_loop": null,
+                    "host": "master",
+                    "play": "Deploy or remove multiple apps to Kubernetes",
+                    "play_pattern": "master",
+                    "play_uuid": "0242ac11-0002-7386-509b-000000000003",
+                    "playbook": "/home/ubuntu/f5_ansible_cis/ccn-app/app_deploy.yaml",
+                    "playbook_uuid": "fcc2c7f3-9460-4f79-90f4-0e5fc6dfd308",
+                    "remote_addr": "master",
+                    "resolved_action": "kubernetes.core.k8s",
+                    "role": "manage_k8s_app",
+                    "start": "2025-05-15T22:47:19.265841+00:00",
+                    "task": "Create namespace (if not exists)",
+                    "task_action": "kubernetes.core.k8s",
+                    "task_args": "",
+                    "task_path": "/home/ubuntu/f5_ansible_cis/ccn-app/roles/manage_k8s_app/tasks/main.yaml:1",
+                    "task_uuid": "0242ac11-0002-7386-509b-00000000000b",
+                    "uuid": "b32c22b6-9721-408e-9890-9d5e20600d70"
+                },
+                {
+                    "__changed": false,
+                    "__duration": "0s",
+                    "__host": "master",
+                    "__number": 1,
+                    "__result": "Ok",
+                    "__task": "Deploy applications",
+                    "__task_action": "include_tasks",
+                    "duration": 0.022734,
+                    "end": "2025-05-15T22:47:19.322211+00:00",
+                    "event_loop": null,
+                    "host": "master",
+                    "play": "Deploy or remove multiple apps to Kubernetes",
+                    "play_pattern": "master",
+                    "play_uuid": "0242ac11-0002-7386-509b-000000000003",
+                    "playbook": "/home/ubuntu/f5_ansible_cis/ccn-app/app_deploy.yaml",
+                    "playbook_uuid": "fcc2c7f3-9460-4f79-90f4-0e5fc6dfd308",
+                    "remote_addr": "master",
+                    "res": {
+                        "changed": false,
+                        "msg": "All items completed",
+                        "results": [
+                            {
+                                "_ansible_item_label": {
+                                    "deploy_dns": "tue",
+                                    "deploy_ingress": true,
+                                    "deploy_ingresslink": true,
+                                    "deploy_waf": true,
+                                    "deployment": [
+                                        {
+                                            "name": "tea",
+                                            "port": 8080,
+                                            "replicas": 2
+                                        },
+                                        {
+                                            "name": "coffee",
+                                            "port": 8080,
+                                            "replicas": 3
+                                        }
+                                    ],
+                                    "image": "harbor.test.local/library/nginxdemos/nginx-hello",
+                                    "ingress": {
+                                        "host": "cafe.lab.test.local",
+                                        "paths": [
+                                            {
+                                                "path": "tea",
+                                                "serviceName": "tea",
+                                                "servicePort": 80
+                                            },
+                                            {
+                                                "path": "coffee",
+                                                "serviceName": "coffee",
+                                                "servicePort": 80
+                                            }
+                                        ]
+                                    },
+                                    "ip_address": "10.1.10.100",
+                                    "name": "cafe",
+                                    "namespace": "default",
+                                    "services": [
+                                        {
+                                            "name": "tea",
+                                            "port": 80,
+                                            "targetPort": 8080
+                                        },
+                                        {
+                                            "name": "coffee",
+                                            "port": 80,
+                                            "targetPort": 8080
+                                        }
+                                    ]
+                                },
+                                "ansible_loop_var": "app",
+                                "app": {
+                                    "deploy_dns": "tue",
+                                    "deploy_ingress": true,
+                                    "deploy_ingresslink": true,
+                                    "deploy_waf": true,
+                                    "deployment": [
+                                        {
+                                            "name": "tea",
+                                            "port": 8080,
+                                            "replicas": 2
+                                        },
+                                        {
+                                            "name": "coffee",
+                                            "port": 8080,
+                                            "replicas": 3
+                                        }
+                                    ],
+                                    "image": "harbor.test.local/library/nginxdemos/nginx-hello",
+                                    "ingress": {
+                                        "host": "cafe.lab.test.local",
+                                        "paths": [
+                                            {
+                                                "path": "tea",
+                                                "serviceName": "tea",
+                                                "servicePort": 80
+                                            },
+                                            {
+                                                "path": "coffee",
+                                                "serviceName": "coffee",
+                                                "servicePort": 80
+                                            }
+                                        ]
+                                    },
+                                    "ip_address": "10.1.10.100",
+                                    "name": "cafe",
+                                    "namespace": "default",
+                                    "services": [
+                                        {
+                                            "name": "tea",
+                                            "port": 80,
+                                            "targetPort": 8080
+                                        },
+                                        {
+                                            "name": "coffee",
+                                            "port": 80,
+                                            "targetPort": 8080
+                                        }
+                                    ]
+                                },
+                                "include": "deploy_app.yaml",
+                                "include_args": {}
+                            }
+                        ]
+                    },
+                    "resolved_action": null,
+                    "role": "manage_k8s_app",
+                    "start": "2025-05-15T22:47:19.299477+00:00",
+                    "task": "Deploy applications",
+                    "task_action": "include_tasks",
+                    "task_args": "",
+                    "task_path": "/home/ubuntu/f5_ansible_cis/ccn-app/roles/manage_k8s_app/tasks/main.yaml:12",
+                    "task_uuid": "0242ac11-0002-7386-509b-00000000000d",
+                    "uuid": "1a3d1d20-c9a3-40f6-a504-5836c2b5d680"
+                },
+                {
+                    "__changed": false,
+                    "__duration": "0s",
+                    "__host": "master",
+                    "__number": 2,
+                    "__result": "Unreachable",
+                    "__task": "Apply deployment",
+                    "__task_action": "kubernetes.core.k8s",
+                    "duration": 0.254886,
+                    "end": "2025-05-15T22:47:19.605998+00:00",
+                    "host": "master",
+                    "play": "Deploy or remove multiple apps to Kubernetes",
+                    "play_pattern": "master",
+                    "play_uuid": "0242ac11-0002-7386-509b-000000000003",
+                    "playbook": "/home/ubuntu/f5_ansible_cis/ccn-app/app_deploy.yaml",
+                    "playbook_uuid": "fcc2c7f3-9460-4f79-90f4-0e5fc6dfd308",
+                    "remote_addr": "master",
+                    "res": {
+                        "changed": false,
+                        "msg": "All items completed",
+                        "results": [
+                            {
+                                "_ansible_item_label": {
+                                    "name": "tea",
+                                    "port": 8080,
+                                    "replicas": 2
+                                },
+                                "ansible_loop_var": "deploy",
+                                "deploy": {
+                                    "name": "tea",
+                                    "port": 8080,
+                                    "replicas": 2
+                                },
+                                "msg": "Failed to connect to the host via ssh: Warning: Permanently added '10.1.1.8' (ED25519) to the list of known hosts.\r\n1000@10.1.1.8: Permission denied (publickey,password).",
+                                "unreachable": true
+                            },
+                            {
+                                "_ansible_item_label": {
+                                    "name": "coffee",
+                                    "port": 8080,
+                                    "replicas": 3
+                                },
+                                "ansible_loop_var": "deploy",
+                                "deploy": {
+                                    "name": "coffee",
+                                    "port": 8080,
+                                    "replicas": 3
+                                },
+                                "msg": "Failed to connect to the host via ssh: 1000@10.1.1.8: Permission denied (publickey,password).",
+                                "unreachable": true
+                            }
+                        ],
+                        "unreachable": true
+                    },
+                    "resolved_action": "kubernetes.core.k8s",
+                    "role": "manage_k8s_app",
+                    "start": "2025-05-15T22:47:19.351112+00:00",
+                    "task": "Apply deployment",
+                    "task_action": "kubernetes.core.k8s",
+                    "task_args": "",
+                    "task_path": "/home/ubuntu/f5_ansible_cis/ccn-app/roles/manage_k8s_app/tasks/deploy_app.yaml:1",
+                    "task_uuid": "0242ac11-0002-7386-509b-00000000002d",
+                    "uuid": "60c9a411-08a0-4654-a9ac-022b1e71fc1d"
+                }
+            ],
+            "uuid": "0242ac11-0002-7386-509b-000000000003"
+        }
+    ],
+    "settings_entries": {
+        "ansible-navigator": {
+            "ansible": {
+                "config": {
+                    "help": false,
+                    "path": "/home/ubuntu/f5_ansible_cis/ccn-app/ansible.cfg"
+                },
+                "doc": {
+                    "help": false,
+                    "plugin": {
+                        "type": "module"
+                    }
+                },
+                "inventory": {
+                    "entries": [
+                        "/home/ubuntu/f5_ansible_cis/ccn-app/inventory"
+                    ],
+                    "help": false
+                },
+                "playbook": {
+                    "help": false,
+                    "path": "/home/ubuntu/f5_ansible_cis/ccn-app/app_deploy.yaml"
+                }
+            },
+            "ansible-builder": {
+                "help": false,
+                "workdir": "/home/ubuntu/f5_ansible_cis/ccn-app"
+            },
+            "ansible-runner": {
+                "job-events": false
+            },
+            "app": "run",
+            "collection-doc-cache-path": "/home/ubuntu/.cache/ansible-navigator/collection_doc_cache.db",
+            "color": {
+                "enable": true,
+                "osc4": true
+            },
+            "editor": {
+                "command": "vi +{line_number} {filename}",
+                "console": true
+            },
+            "enable-prompts": false,
+            "exec": {
+                "command": "/bin/bash",
+                "shell": true
+            },
+            "execution-environment": {
+                "container-engine": "docker",
+                "enabled": true,
+                "image": "dialtone21/f5_cis_ee:1.0.0",
+                "pull": {
+                    "policy": "tag"
+                }
+            },
+            "format": "yaml",
+            "images": {
+                "details": [
+                    "everything"
+                ]
+            },
+            "logging": {
+                "append": true,
+                "file": "/home/ubuntu/f5_ansible_cis/ccn-app/ansible-navigator.log",
+                "level": "warning"
+            },
+            "mode": "interactive",
+            "playbook-artifact": {
+                "enable": true,
+                "save-as": "playbook-artifacts/{playbook_name}-artifact-{time_stamp}.json"
+            },
+            "settings": {
+                "effective": false,
+                "sample": false,
+                "schema": "json",
+                "sources": false
+            },
+            "time-zone": "UTC"
+        }
+    },
+    "settings_sources": {
+        "ansible-navigator.ansible-builder.help": "Defaults",
+        "ansible-navigator.ansible-builder.workdir": "Defaults",
+        "ansible-navigator.ansible-lint.config": "Not set",
+        "ansible-navigator.ansible-lint.lintables": "Not set",
+        "ansible-navigator.ansible-runner.artifact-dir": "Not set",
+        "ansible-navigator.ansible-runner.job-events": "Defaults",
+        "ansible-navigator.ansible-runner.rotate-artifacts-count": "Not set",
+        "ansible-navigator.ansible-runner.timeout": "Not set",
+        "ansible-navigator.ansible.cmdline": "Not set",
+        "ansible-navigator.ansible.config.help": "Defaults",
+        "ansible-navigator.ansible.config.path": "Settings file",
+        "ansible-navigator.ansible.doc.help": "Defaults",
+        "ansible-navigator.ansible.doc.plugin.name": "Not set",
+        "ansible-navigator.ansible.doc.plugin.type": "Defaults",
+        "ansible-navigator.ansible.inventory.entries": "Ansible configuration file",
+        "ansible-navigator.ansible.inventory.help": "Defaults",
+        "ansible-navigator.ansible.playbook.help": "Defaults",
+        "ansible-navigator.ansible.playbook.path": "Previous cli command",
+        "ansible-navigator.app": "Command line",
+        "ansible-navigator.collection-doc-cache-path": "Defaults",
+        "ansible-navigator.color.enable": "Defaults",
+        "ansible-navigator.color.osc4": "Defaults",
+        "ansible-navigator.editor.command": "Defaults",
+        "ansible-navigator.editor.console": "Defaults",
+        "ansible-navigator.enable-prompts": "Defaults",
+        "ansible-navigator.exec.command": "Defaults",
+        "ansible-navigator.exec.shell": "Defaults",
+        "ansible-navigator.execution-environment.container-engine": "Settings file",
+        "ansible-navigator.execution-environment.container-options": "Not set",
+        "ansible-navigator.execution-environment.enabled": "Defaults",
+        "ansible-navigator.execution-environment.environment-variables.pass": "Not set",
+        "ansible-navigator.execution-environment.environment-variables.set": "Not set",
+        "ansible-navigator.execution-environment.image": "Settings file",
+        "ansible-navigator.execution-environment.pull.arguments": "Not set",
+        "ansible-navigator.execution-environment.pull.policy": "Defaults",
+        "ansible-navigator.execution-environment.volume-mounts": "Not set",
+        "ansible-navigator.format": "Defaults",
+        "ansible-navigator.images.details": "Defaults",
+        "ansible-navigator.inventory-columns": "Not set",
+        "ansible-navigator.logging.append": "Defaults",
+        "ansible-navigator.logging.file": "Defaults",
+        "ansible-navigator.logging.level": "Defaults",
+        "ansible-navigator.mode": "Defaults",
+        "ansible-navigator.playbook-artifact.enable": "Settings file",
+        "ansible-navigator.playbook-artifact.replay": "Not set",
+        "ansible-navigator.playbook-artifact.save-as": "Settings file",
+        "ansible-navigator.settings.effective": "Defaults",
+        "ansible-navigator.settings.sample": "Defaults",
+        "ansible-navigator.settings.schema": "Defaults",
+        "ansible-navigator.settings.sources": "Defaults",
+        "ansible-navigator.time-zone": "Defaults",
+        "settings_file_path": "/home/ubuntu/f5_ansible_cis/ccn-app/ansible-navigator.yaml",
+        "settings_file_source": "Search path"
+    },
+    "status": "failed",
+    "status_color": 9,
+    "stdout": [
+        "",
+        "PLAY [Deploy or remove multiple apps to Kubernetes] ****************************",
+        "",
+        "TASK [manage_k8s_app : Create namespace (if not exists)] ***********************",
+        "\u001b[0;36mskipping: [master] => (item=cafe) \u001b[0m",
+        "\u001b[0;36mskipping: [master]\u001b[0m",
+        "",
+        "TASK [manage_k8s_app : Deploy applications] ************************************",
+        "\u001b[0;36mincluded: /home/ubuntu/f5_ansible_cis/ccn-app/roles/manage_k8s_app/tasks/deploy_app.yaml for master => (item={'name': 'cafe', 'namespace': 'default', 'image': 'harbor.test.local/library/nginxdemos/nginx-hello', 'deploy_ingress': True, 'deploy_ingresslink': True, 'deploy_waf': True, 'deploy_dns': 'tue', 'ip_address': '10.1.10.100', 'deployment': [{'name': 'tea', 'replicas': 2, 'port': 8080}, {'name': 'coffee', 'replicas': 3, 'port': 8080}], 'services': [{'name': 'tea', 'port': 80, 'targetPort': 8080}, {'name': 'coffee', 'port': 80, 'targetPort': 8080}], 'ingress': {'host': 'cafe.lab.test.local', 'paths': [{'path': 'tea', 'serviceName': 'tea', 'servicePort': 80}, {'path': 'coffee', 'serviceName': 'coffee', 'servicePort': 80}]}})\u001b[0m",
+        "\u001b[1;35m[WARNING]: Found variable using reserved name: namespace\u001b[0m",
+        "",
+        "TASK [manage_k8s_app : Apply deployment] ***************************************",
+        "\u001b[0;31mfailed: [master] (item={'name': 'tea', 'replicas': 2, 'port': 8080}) => {\"ansible_loop_var\": \"deploy\", \"deploy\": {\"name\": \"tea\", \"port\": 8080, \"replicas\": 2}, \"msg\": \"Failed to connect to the host via ssh: Warning: Permanently added '10.1.1.8' (ED25519) to the list of known hosts.\\r\\n1000@10.1.1.8: Permission denied (publickey,password).\", \"unreachable\": true}\u001b[0m",
+        "\u001b[0;31mfailed: [master] (item={'name': 'coffee', 'replicas': 3, 'port': 8080}) => {\"ansible_loop_var\": \"deploy\", \"deploy\": {\"name\": \"coffee\", \"port\": 8080, \"replicas\": 3}, \"msg\": \"Failed to connect to the host via ssh: 1000@10.1.1.8: Permission denied (publickey,password).\", \"unreachable\": true}\u001b[0m",
+        "\u001b[1;31mfatal: [master]: UNREACHABLE! => {\"changed\": false, \"msg\": \"All items completed\", \"results\": [{\"ansible_loop_var\": \"deploy\", \"deploy\": {\"name\": \"tea\", \"port\": 8080, \"replicas\": 2}, \"msg\": \"Failed to connect to the host via ssh: Warning: Permanently added '10.1.1.8' (ED25519) to the list of known hosts.\\r\\n1000@10.1.1.8: Permission denied (publickey,password).\", \"unreachable\": true}, {\"ansible_loop_var\": \"deploy\", \"deploy\": {\"name\": \"coffee\", \"port\": 8080, \"replicas\": 3}, \"msg\": \"Failed to connect to the host via ssh: 1000@10.1.1.8: Permission denied (publickey,password).\", \"unreachable\": true}], \"unreachable\": true}\u001b[0m",
+        "",
+        "PLAY RECAP *********************************************************************",
+        "\u001b[0;31mmaster\u001b[0m                     : \u001b[0;32mok=1   \u001b[0m changed=0    \u001b[1;31munreachable=1   \u001b[0m failed=0    \u001b[0;36mskipped=1   \u001b[0m rescued=0    ignored=0   "
+    ],
+    "version": "2.0.0"
+}

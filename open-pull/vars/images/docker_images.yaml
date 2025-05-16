@@ -2,8 +2,8 @@ docker_images:
   - name: "f5networks/k8s-bigip-ctlr"
     short_name: "f5networks/k8s-bigip-ctlr"
     docker_tag: "2.18.1"                     
-  - name: "quay.io/f5_business_development/f5_ee"
-    short_name: f5_business_development/f5_ee
+  - name: "dialtone21/f5_cis_ee:1.0.0"
+    short_name: dialtone21/f5_cis_ee
     docker_tag: "latest"
   - name: "nginxdemos/nginx-hello"
     short_name: nginxdemos/nginx-hello

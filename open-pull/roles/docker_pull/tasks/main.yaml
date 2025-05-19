@@ -6,18 +6,24 @@
   loop: "{{ docker_images }}"                          # Loop through the list of images
   register: pulled_images
 
-
 - name: Display image pull result
   debug:
     var: pulled_images
 
-- name: Save Docker images to a tar archive
+- name: Check if archive already exists
+  stat:
+    path: "/tmp/{{ item.name | replace('/', '_') }}_{{ item.docker_tag }}.tar"
+  loop: "{{ docker_images }}"
+  register: archive_stat
+
+- name: Save Docker images to a tar archive if not already archived
   community.docker.docker_image:
-    name: "{{ item.name }}"          # Docker image name
-    tag: "{{ item.docker_tag }}"            # Docker image tag/version
-    source: local                     # Save the image to a tar archive
-    archive_path: "/tmp/{{ item.name | replace('/', '_') }}_{{ item.docker_tag }}.tar"  # Archive path
-  loop: "{{ docker_images }}"        # Loop through the list of images
+    name: "{{ item.0.name }}"
+    tag: "{{ item.0.docker_tag }}"
+    source: local
+    archive_path: "/tmp/{{ item.0.name | replace('/', '_') }}_{{ item.0.docker_tag }}.tar"
+  loop: "{{ docker_images | zip(archive_stat.results) | list }}"
+  when: not item.1.stat.exists
   register: archived_images
 
 - name: Debug saved docker images result

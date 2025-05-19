@@ -1,0 +1,19 @@
+- name: Set CA cert destination path based on OS family
+  set_fact:
+    ca_cert_dest_path: >-
+      {{ debian_cert_path + ca_cert_filename if ansible_os_family == 'Debian'
+         else redhat_cert_path + ca_cert_filename }}
+
+- name: Copy CA certificate to the appropriate location
+  copy:
+    src: "{{ ca_cert_filename }}"
+    dest: "{{ ca_cert_dest_path }}"
+    mode: '0644'
+
+- name: Update CA certificates (Debian)
+  command: update-ca-certificates
+  when: ansible_os_family == "Debian"
+
+- name: Update CA trust (RedHat)
+  command: update-ca-trust extract
+  when: ansible_os_family == "RedHat"

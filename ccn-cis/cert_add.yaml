@@ -1,0 +1,7 @@
+- name: Install custom CA certificate
+  hosts: master
+  become: true
+
+
+  roles:
+    - add_ca_cert

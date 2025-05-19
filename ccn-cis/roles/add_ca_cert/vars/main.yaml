@@ -1,0 +1,5 @@
+debian_cert_path: /usr/local/share/ca-certificates/
+redhat_cert_path: /etc/pki/ca-trust/source/anchors/
+
+
+ca_cert_filename: harbor-ca.crt

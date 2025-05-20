@@ -13,11 +13,11 @@ docker_images:
     docker_tag: "latest"
   - name: "quay.io/jetstack/cert-manager-controller:"
     short_name: jetstack/cert-manager-controller
-    docker_tag: "v1.17.0"    
+    docker_tag: "v1.17.2"    
   - name: "quay.io/jetstack/cert-manager-cainjector"
     short_name: jetstack/cert-manager-cainjector
-    docker_tag: "v1.17.0"
+    docker_tag: "v1.17.2"
   - name: "quay.io/jetstack/cert-manager-webhook"
     short_name: jetstack/cert-manager-webhook
-    docker_tag: "v1.17.0"
+    docker_tag: "v1.17.2"
 archive_dir: "/tmp"

@@ -5,7 +5,7 @@ helm_charts:
     values_file: vars/values/f5-bigip-ctlr.yaml
 
   - release_name: cert-manager
-    chart_ref: oci://harbor.test.local/library/cert-manager:v1.17.1
+    chart_ref: oci://harbor.test.local/library/cert-manager:v1.17.2
     release_namespace: cert-manager
     values_file: vars/values/cert-manager.yaml
 
